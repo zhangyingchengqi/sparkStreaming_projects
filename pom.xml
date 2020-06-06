@@ -113,7 +113,7 @@
         <dependency>
             <groupId>io.spray</groupId>
             <artifactId>spray-json_2.10</artifactId>
-            <version>1.3.2</version>
+            <version>1.3.5</version>
         </dependency>
         <dependency><!-- Http -->
             <groupId>org.scalaj</groupId>
