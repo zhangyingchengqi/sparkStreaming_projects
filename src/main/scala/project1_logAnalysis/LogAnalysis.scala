@@ -102,4 +102,29 @@ object LogAnalysis {
 
     }
   }
+
+
+  /*
+ 结果分析:
+     批处理时间间隔: 2秒
+窗口长度: 4秒
+滑动时间间隔: 2秒
+
+
+
+
+-> 6个Error
+state: 6个error
+window: 6个error
+
+
+->
+state: 6个error
+window: 6个error
+
+-> 增加3个error
+state: 6+3 个error
+window:  3个error
+
+   */
 }
