@@ -13,19 +13,17 @@ object Conf {
 
   // spark 参数
   val master = "local[*]"
-  val localDir = "//Users/yingzhang/Desktop/data/tmp"
-  val perMaxRate = "5"
+  val localDir = "./tmp"
+  val perMaxRate = "5"    // 设定对目标topic每个partition每秒钟拉取的数据条数
   val interval = 3 // seconds
-  val parallelNum = "15"
-  val executorMem = "1G"
-  val concurrentJobs = "5"
-  val coresMax = "3"
+  val executorMem = "1G"    //   内存数/executor
+  val coresMax = "3"     //总共最多几个核
 
   // kafka configuration
   val brokers = "localhost:9092,localhost:9093,localhost:9094"
   val zk = "localhost:2181"
   val group = "wordFreqGroup"
-  val topics = "wcTopics"
+  val topics = "comments"
 
   // mysql configuration
   val mysqlConfig = Map("url" -> "jdbc:mysql://localhost:3306/word_freq?characterEncoding=UTF-8", "username" -> "root", "password" -> "a")
