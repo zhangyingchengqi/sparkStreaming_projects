@@ -1,6 +1,6 @@
 create database log_analysis;
 
---需求1: 筛选出所有的 error,转存数据库 
+--需求1: 筛选出所有的 error,利用spark sql 转存数据库 
 --   id       level       method      content
 use log_analysis;
 
