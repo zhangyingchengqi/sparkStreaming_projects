@@ -34,12 +34,12 @@ object MysqlService extends Serializable {
           partitionRecords.foreach(record => {
             log.info("待操作的记录>>>>>>>" + record)
             val createTime = System.currentTimeMillis()  //系统时间的hao秒
-            //按月建立一张新表存储数据
+            //按月建立一张新表存储数据:   按单词和时间进行区分，如单词和时间相同，则update, 不同则插入。
             var sql = s"CREATE TABLE if not exists `word_count_${TimeParse.timeStamp2String(createTime, "yyyyMM")}`(`id` int(11) NOT NULL AUTO_INCREMENT,`word` varchar(64) NOT NULL,`count` int(11) DEFAULT '0',`date` date NOT NULL, PRIMARY KEY (`id`), UNIQUE KEY `word` (`word`,`date`) ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
             statement.addBatch(sql)   //将sql语句添加到批
             sql = s"insert into word_count_${TimeParse.timeStamp2String(createTime, "yyyyMM")} (word, count, date) " +
               s"values ('${record._1}',${record._2},'${TimeParse.timeStamp2String(createTime, "yyyy-MM-dd")}') " +
-              s"on duplicate key update count=count+values(count);"      //   在更新表格中每个词的统计值时，用 on duplicate key进行词频数量的累加.
+              s"on duplicate key update count=count+values(count) "      //   在更新表格中每个词的统计值时，用 on duplicate key进行词频数量的累加.
             log.info(   "sql:"+ sql )
             //   word列为  unique列
               // 如果在INSERT语句末尾指定了ON DUPLICATE KEY UPDATE，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则执行旧行UPDATE；如果不会导致唯一值列重复的问题，则插入新行
@@ -91,7 +91,6 @@ object MysqlService extends Serializable {
 
   def main(args: Array[String]): Unit = {
        val set= MysqlService.getUserWords()
-    print(  set )
-
+        print(  set )
   }
 }

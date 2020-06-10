@@ -51,14 +51,14 @@ object SegmentService extends Serializable {
       val postUrl = Conf.segmentorHost + "/token/"
       try {
         val wordsSet = retry(3)(segment(postUrl, record)) // 失败重试3次
-        log.warn(s"[拆分成功] 记录: ${record}\t耗时: ${System.currentTimeMillis - preTime}")
+        log.info(s"[拆分成功] 记录: ${record}\t耗时: ${System.currentTimeMillis - preTime}")
         // 进行词语统计
         //val keyCount = Map[String, Int]()
         for (word <- wordDic) {
           if (wordsSet.contains(word))
             keyCount += word -> 1
         }
-        log.warn(s"[keyCountSuccess] words size: ${wordDic.size} (entitId_createTime_word_language, 1):\n${keyCount.mkString("\n")}")
+        log.info(s"[keyCountSuccess] words size: ${wordDic.size} (entitId_createTime_word_language, 1):\n${keyCount.mkString("\n")}")
         keyCount
       } catch {
         case e: Exception => {

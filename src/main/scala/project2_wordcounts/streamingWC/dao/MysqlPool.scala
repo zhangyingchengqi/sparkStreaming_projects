@@ -67,4 +67,10 @@ object MysqlManager {
     }
     mysqlManager
   }
+
+  def main(args: Array[String]): Unit = {
+       val pool=MysqlManager.getMysqlManager
+       val con=pool.getConnection
+      println(  con )
+  }
 }
